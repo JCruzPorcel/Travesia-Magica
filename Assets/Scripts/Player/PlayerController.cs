@@ -5,9 +5,14 @@ using UnityEngine.InputSystem;
 [DisallowMultipleComponent]
 public class PlayerController : MonoBehaviour
 {
-    [Range(0f, 50f)][SerializeField] private float speed = 25f;
+    [SerializeField, Range(0f, 50f)] private float speed = 25f;
     private Vector2 direction;
-    public  Sprite[] sprites;
+    private GameManager gameManager;
+    private Animator animator;
+
+    private GameObject characterGo;
+    [SerializeField] Transform playerSpawnPoint;
+
 
     private void Awake()
     {
@@ -18,9 +23,25 @@ public class PlayerController : MonoBehaviour
         playerInputs.Player.Movement.canceled += OnMove;
     }
 
+    private void Start()
+    {
+        gameManager = GameManager.Instance;
+        PlayerSpawner();        
+        animator = GetComponentInChildren<Animator>();
+    }
+
     private void FixedUpdate()
     {
-        Movement();
+        if (gameManager.currentGameState == GameState.InGame)
+        {
+            Movement();
+
+            animator.speed = 1f;
+        }
+        else
+        {
+            animator.speed = 0f;
+        }
     }
 
     private void Movement()
@@ -31,5 +52,13 @@ public class PlayerController : MonoBehaviour
     private void OnMove(InputAction.CallbackContext context)
     {
         direction = context.ReadValue<Vector2>();
+    }
+
+
+    private void PlayerSpawner()
+    {
+        characterGo = gameManager.CharacterSelected.Prefab;
+
+        Instantiate(characterGo, playerSpawnPoint);
     }
 }

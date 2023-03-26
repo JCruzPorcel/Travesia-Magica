@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +16,7 @@ public class FadeInOut : MonoBehaviour
     private CanvasGroup canvasGroup;
     [SerializeField] private Animator animator;
     private int loopCount;
+    [SerializeField] Sprite finsihLoadImg;
 
 
     void Start()
@@ -31,22 +31,22 @@ public class FadeInOut : MonoBehaviour
     {
         if (isLoading)
         {
-
-            if (!loadingScreen.activeInHierarchy) return;
-
-
-            float normalizedTime = animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-
-            if (normalizedTime >= 1.0f)
+            if (loadingScreen.activeInHierarchy)
             {
-                loopCount++;
-                animator.Play(animator.GetCurrentAnimatorStateInfo(0).fullPathHash, -1, 0f);
-            }
+                float normalizedTime = animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
 
-            if (loopCount >= 2)
-            {
-                animator.speed = 0f;
-                isLoading = false;
+                if (normalizedTime >= 1.0f)
+                {
+                    loopCount++;
+                    animator.Play(animator.GetCurrentAnimatorStateInfo(0).fullPathHash, -1, 0f);
+                }
+
+                if (loopCount >= Random.Range(3,5))
+                {
+                    animator.speed = 0f;
+                    Image img = animator.GetComponent<Image>();
+                    img.sprite = finsihLoadImg;
+                }
             }
         }
     }

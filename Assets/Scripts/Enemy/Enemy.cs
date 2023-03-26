@@ -3,17 +3,39 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [Range(0f, 50f)][SerializeField] protected float speed = 10f;
+    protected Animator animator;
 
+    GameManager gameManager;
+
+    private void Start()
+    {
+        gameManager = GameManager.Instance;
+
+
+        animator = GetComponentInChildren<Animator>();
+
+
+    }
 
     private void Update()
     {
-        DespawnDistance();
+        if (gameManager.currentGameState == GameState.InGame)
+        {
+            animator.speed = 1f;
+            DespawnDistance();
+        }
+        else
+        {
+            animator.speed = 0f;
+        }
     }
 
     private void FixedUpdate()
     {
-        if (GameManager.Instance.currentGameState == GameState.InGame)
-        Movement();
+        if (gameManager.currentGameState == GameState.InGame)
+        {
+            Movement();
+        }
     }
 
     public virtual void Movement()

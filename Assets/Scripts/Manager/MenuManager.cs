@@ -1,22 +1,11 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
-public enum MenuState
-{
-    MainMenu,
-    SelectLevel,
-    SelectChar,
-    Options,
-}
 
 
 public class MenuManager : MonoBehaviour
 {
-    public MenuState currentMenuState = MenuState.MainMenu;
-
     [Header("Main Menu")]
     [SerializeField] private GameObject mainMenuGo;
     [Space(5)]
@@ -24,11 +13,13 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Button optionButton;
     [SerializeField] private Button exitButton;
 
+    [Space(10)]
 
     [Header("Character Selection")]
     [SerializeField] private GameObject charSelectionGo;
 
-    [Space(10)]
+    [Space(5)]
+
     [Header("Character One")]
     [SerializeField] private Button characterOneButton;
     [SerializeField] private Image characterOneImage;
@@ -36,6 +27,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private CharacterData characterOne;
 
     [Space(10)]
+
     [Header("Character Two")]
     [SerializeField] private Button characterTwoButton;
     [SerializeField] private Image characterTwoImage;
@@ -44,23 +36,25 @@ public class MenuManager : MonoBehaviour
 
     [Space(10)]
 
-    [Header("Confirm")]
+    [Header("Confirm Character")]
     [SerializeField] private GameObject confirmCharacterGo;
     [SerializeField] private Button confirmCharacterButton;
-    [Space(5)]
+    [Space(5)] 
     [SerializeField] private string confirmText;
-    [Space(10)]
 
+    [Space(10)]
 
     [Header("Options")]
     [SerializeField] private GameObject optionGo;
     [Space(5)]
     [SerializeField] private Button backToMenuButton;
 
+    [Space(10)]
+
     [Header("Load Level")]
     [SerializeField] private string levelName = string.Empty;
+    public string LevelName { get { return levelName; } }
 
-    public string Levelname { get => levelName; set => levelName = value; }
 
     [SerializeField] private float loadingTime = 0f;
 
@@ -68,9 +62,10 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private float transitionTime = 1f;
     GameManager gameManager;
 
+
     private void Awake()
     {
-        gameManager = FindAnyObjectByType<GameManager>();
+        gameManager = FindFirstObjectByType<GameManager>();
 
         if (gameManager.currentGameState == GameState.MainMenu)
             CloseWindows();
@@ -78,10 +73,7 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
-        if (gameManager == null)
-            gameManager = FindAnyObjectByType<GameManager>();
-
-        currentMenuState = MenuState.MainMenu;
+        gameManager = GameManager.Instance;
 
         characterOneImage.sprite = characterOne.CharacterImage;
         characterTwoImage.sprite = characterTwo.CharacterImage;
@@ -109,14 +101,15 @@ public class MenuManager : MonoBehaviour
             StartCoroutine(MenuTransition(optionGo, mainMenuGo, false));
         });
 
+        exitButton.onClick.AddListener(() =>
+        {
+            DisableButtonInteraction();
+            gameManager.ExitGame(transitionTime);
+        });
+
         backToMenuButton.onClick.AddListener(() =>
         {
             StartCoroutine(MenuTransition(mainMenuGo, charSelectionGo, false));
-
-            if (confirmCharacterGo != null)
-            {
-                confirmCharacterGo.SetActive(false);
-            }
         });
 
         characterOneButton.onClick.AddListener(() =>
@@ -132,6 +125,7 @@ public class MenuManager : MonoBehaviour
         confirmCharacterButton.onClick.AddListener(() =>
         {
             StartCoroutine(MenuTransition(null, null, true));
+            gameManager.StartGame(loadingTime);
         });
 
         #endregion
@@ -155,9 +149,11 @@ public class MenuManager : MonoBehaviour
 
     private void CharacterSelect(CharacterData character, GameObject panel)
     {
+
         if (character != null)
         {
-            GameManager.Instance.CharacterSelected = character;
+            gameManager.CharacterSelected = null;
+            gameManager.CharacterSelected = character;
         }
 
         if (confirmCharacterGo != null)
@@ -178,24 +174,6 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    IEnumerator LoadInGameLevelAsync()
-    {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(levelName);
-        asyncLoad.allowSceneActivation = false;
-
-        yield return new WaitForSeconds(loadingTime);
-
-        while (!asyncLoad.isDone)
-        {
-            if (asyncLoad.progress >= 0.9f)
-            {
-                asyncLoad.allowSceneActivation = true;
-            }
-            yield return null;
-        }
-    }
-
-
     IEnumerator MenuTransition(GameObject openMenu, GameObject closeMenu, bool isLoading)
     {
         fadeInOut.FadeIn();
@@ -206,7 +184,8 @@ public class MenuManager : MonoBehaviour
 
         if (isLoading)
         {
-            StartCoroutine(LoadInGameLevelAsync());
+            gameManager.CurrentLevelName = levelName;
+            gameManager.LoadLevelAsync(loadingTime, levelName);
         }
         else
         {
@@ -216,6 +195,12 @@ public class MenuManager : MonoBehaviour
                 fadeInOut.FadeOut();
             }
         }
+
+        if (confirmCharacterGo != null && confirmCharacterGo.activeInHierarchy)
+        {
+            confirmCharacterGo.SetActive(false);
+        }
+
         EnableButtonInteraction();
     }
 
