@@ -18,6 +18,9 @@ public class GameManager : SingletonPersistent<GameManager>
     [SerializeField] private CharacterData characterSelected;
     public CharacterData CharacterSelected { get => characterSelected; set => characterSelected = value; }
 
+    [SerializeField] private PetData petSelected;
+    public PetData PetSelected { get => petSelected; set => petSelected = value; }
+
     private string currentLevelName = string.Empty;
     public string CurrentLevelName { get => currentLevelName; set => currentLevelName = value; }
 
@@ -28,6 +31,7 @@ public class GameManager : SingletonPersistent<GameManager>
     private void Start()
     {
         //currentGameState = GameState.MainMenu;
+        Debug.Log($"Current Game State: {currentGameState}");
     }
 
     public void StartGame(float time)
@@ -58,6 +62,7 @@ public class GameManager : SingletonPersistent<GameManager>
         // Notificar a otros objetos que el estado del juego ha cambiado
         OnGameStateChanged?.Invoke(newGameState);
 
+
         switch (newGameState)
         {
             case GameState.MainMenu:
@@ -70,6 +75,8 @@ public class GameManager : SingletonPersistent<GameManager>
 
             case GameState.OnPause:
                 // TODO: Implementar código para el estado OnPause
+                OptionsManager optionsManager = FindFirstObjectByType<OptionsManager>();
+                optionsManager.OptionsMenu.SetActive(true);
                 break;
         }
     }

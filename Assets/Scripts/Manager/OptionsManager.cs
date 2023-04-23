@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.Windows;
 
 public class OptionsManager : MonoBehaviour
 {
@@ -11,22 +12,28 @@ public class OptionsManager : MonoBehaviour
     [SerializeField] Button mainMenuButton;
     [SerializeField] Button exitButton;
 
+    public Button BackButton {get {return backButton; } }
 
     [Header("Menu Windows")]
     [SerializeField] GameObject optionMenu;
     [SerializeField] GameObject mainMenu;
 
+    public GameObject OptionsMenu { get { return optionMenu; } }
+
     const string mainMenuLevel = "MainMenu";
 
     bool inOptionMenu;
+    public bool InOptionMenu { get { return inOptionMenu;} set { inOptionMenu = value; } }
+
     FadeInOut fadeInOut;
-    float transitionTime = 1f;
+    readonly float transitionTime = 1f;
     GameManager gameManager;
-    PlayerInputs playerInputs;
+    PlayerControls playerInputs;
+
 
     private void Awake()
     {
-        playerInputs = new PlayerInputs();
+        playerInputs = new PlayerControls();
         playerInputs.Player.Enable();
         playerInputs.Player.Options.performed += ToggleOptionMenu;
     }
@@ -36,10 +43,7 @@ public class OptionsManager : MonoBehaviour
         gameManager = GameManager.Instance;
         fadeInOut = FindFirstObjectByType<FadeInOut>();
 
-        backButton.onClick.AddListener(() =>
-        {
-            OpenMenu();
-        });
+        backButton.onClick.AddListener(OpenMenu);
 
 
         if (gameManager.currentGameState == GameState.MainMenu) return;
@@ -67,12 +71,15 @@ public class OptionsManager : MonoBehaviour
         });
     }
 
-
     public void OpenMenu()
     {
         if (gameManager.currentGameState == GameState.MainMenu)
         {
-            StartCoroutine(MenuTransition(optionMenu, mainMenu,inOptionMenu));
+            StartCoroutine(MenuTransition(optionMenu, mainMenu, inOptionMenu));
+
+            Button button = FindFirstObjectByType<MenuManager>().PlayButton;
+            gameManager.GetComponent<DeviceManager>().GetCurrentMenuButton(button);
+
         }
         else if (gameManager.currentGameState == GameState.InGame ||
                  gameManager.currentGameState == GameState.OnPause)
@@ -103,7 +110,6 @@ public class OptionsManager : MonoBehaviour
         EnableButtonInteraction();
     }
 
-
     private void ToggleOptionMenu(InputAction.CallbackContext context)
     {
         if (gameManager.currentGameState == GameState.InGame || gameManager.currentGameState == GameState.OnPause)
@@ -131,7 +137,6 @@ public class OptionsManager : MonoBehaviour
         backButton.interactable = false;
 
         if (gameManager.currentGameState == GameState.MainMenu) return;
-
 
         restartButton.interactable = false;
         mainMenuButton.interactable = false;

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5498242458311425772}
   - component: {fileID: 3716786411422702317}
   - component: {fileID: 3680676676839080831}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RavenSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 3531223509750785703}
   - component: {fileID: 4792498125474980722}
   - component: {fileID: -4481067577485843172}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Raven
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,10 +11,7 @@ public class Enemy : MonoBehaviour
     {
         gameManager = GameManager.Instance;
 
-
         animator = GetComponentInChildren<Animator>();
-
-
     }
 
     private void Update()

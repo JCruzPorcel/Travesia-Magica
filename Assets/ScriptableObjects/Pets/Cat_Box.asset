@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a16ba29763670bb4e9e9129bc4f947fe, type: 3}
+  m_Name: Cat_Box
+  m_EditorClassIdentifier: 
+  petName: Cat_Box
+  petImage: {fileID: 1791965415, guid: 63eb4e1e82ee8754fa7a32af2f5d16d2, type: 3}
+  prefab: {fileID: 4386468571873026990, guid: fcc11108032c89c4ab88d480f03aaa7a, type: 3}
