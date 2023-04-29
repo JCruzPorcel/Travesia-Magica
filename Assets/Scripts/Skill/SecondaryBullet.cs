@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SecondaryBullet : BulletBase
+public class SecondaryBullet : BaseBullet
 {
 
 }

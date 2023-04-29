@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 direction;
     private GameManager gameManager;
     private Animator animator;
-
+    private ParticleSystem particles;
     private SpriteRenderer playerSpriteRenderer;
     private GameObject characterGo;
     Transform playerSpawnPoint;
@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
 
         animator = GetComponentInChildren<Animator>();
         playerSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        particles = GetComponentInChildren<ParticleSystem>();
 
         // Calcula los límites de la cámara
         CameraBounds();       
@@ -48,10 +49,16 @@ public class PlayerController : MonoBehaviour
             Movement();
 
             animator.speed = 1f;
+
+            if (particles != null)
+                particles.Play();
         }
         else
         {
             animator.speed = 0f;
+
+            if (particles != null)
+                particles.Pause();
         }
     }
 

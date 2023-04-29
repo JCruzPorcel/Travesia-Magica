@@ -71,6 +71,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shield"",
+                    ""type"": ""Button"",
+                    ""id"": ""2b0b9d1a-4df9-4a85-830d-4ad1414abeb8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -297,7 +306,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""569f814e-108c-4167-8c81-4e5c04ccff9e"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/x"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardAndMouse"",
@@ -308,7 +317,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""527cf8ce-35d9-4b87-98a4-d9b736c4152b"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -319,11 +328,33 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""872b8822-0772-4105-9119-33f3a1a5dbd8"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/z"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Special Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c6112002-8fe6-42d5-9993-4ff00db1e27d"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""Shield"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6f626909-3d47-4982-a11a-1394b294f0eb"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Shield"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -373,6 +404,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_BasicShoot = m_Player.FindAction("Basic Shoot", throwIfNotFound: true);
         m_Player_SecondaryShoot = m_Player.FindAction("Secondary Shoot", throwIfNotFound: true);
         m_Player_SpecialShoot = m_Player.FindAction("Special Shoot", throwIfNotFound: true);
+        m_Player_Shield = m_Player.FindAction("Shield", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
     }
@@ -441,6 +473,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_BasicShoot;
     private readonly InputAction m_Player_SecondaryShoot;
     private readonly InputAction m_Player_SpecialShoot;
+    private readonly InputAction m_Player_Shield;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -450,6 +483,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @BasicShoot => m_Wrapper.m_Player_BasicShoot;
         public InputAction @SecondaryShoot => m_Wrapper.m_Player_SecondaryShoot;
         public InputAction @SpecialShoot => m_Wrapper.m_Player_SpecialShoot;
+        public InputAction @Shield => m_Wrapper.m_Player_Shield;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -474,6 +508,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @SpecialShoot.started += instance.OnSpecialShoot;
             @SpecialShoot.performed += instance.OnSpecialShoot;
             @SpecialShoot.canceled += instance.OnSpecialShoot;
+            @Shield.started += instance.OnShield;
+            @Shield.performed += instance.OnShield;
+            @Shield.canceled += instance.OnShield;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -493,6 +530,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @SpecialShoot.started -= instance.OnSpecialShoot;
             @SpecialShoot.performed -= instance.OnSpecialShoot;
             @SpecialShoot.canceled -= instance.OnSpecialShoot;
+            @Shield.started -= instance.OnShield;
+            @Shield.performed -= instance.OnShield;
+            @Shield.canceled -= instance.OnShield;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -573,6 +613,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnBasicShoot(InputAction.CallbackContext context);
         void OnSecondaryShoot(InputAction.CallbackContext context);
         void OnSpecialShoot(InputAction.CallbackContext context);
+        void OnShield(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

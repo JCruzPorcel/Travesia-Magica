@@ -3,9 +3,13 @@ using UnityEngine;
 public class ItemBase : MonoBehaviour
 {
     [Range(0f, 50f)][SerializeField] protected float speed = 1f;
-    [HideInInspector] public Animator animator;
 
+    public float attackRange;
+    public Transform attackPoint;
+
+    public LayerMask playerLayer;
     GameManager gameManager;
+    [HideInInspector] public Animator animator;
 
     private void Start()
     {
@@ -19,6 +23,7 @@ public class ItemBase : MonoBehaviour
         {
             animator.speed = 1f;
             DespawnDistance();
+            ItemPick();
         }
         else
         {
@@ -49,4 +54,20 @@ public class ItemBase : MonoBehaviour
     }
 
     public virtual void ObjectAtribute() { }
+
+    public virtual void ItemPick()
+    {
+        Vector2 size = new Vector2(attackRange, attackRange);
+
+        Collider2D[] hitPlayer = Physics2D.OverlapBoxAll(attackPoint.position, size, playerLayer);
+
+        foreach (Collider2D player in hitPlayer)
+        {
+            if (player.CompareTag("Player"))
+            {
+                ObjectAtribute();
+                this.gameObject.SetActive(false);
+            }
+        }
+    }
 }

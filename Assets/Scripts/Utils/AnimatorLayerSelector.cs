@@ -7,7 +7,7 @@ public class AnimatorLayerSelector : MonoBehaviour
 
     void Start()
     {
-        if(animator == null)
+        if (animator == null)
             animator = GetComponent<Animator>();
 
         int layerIndex = animator.GetLayerIndex(layerName);
@@ -16,6 +16,14 @@ public class AnimatorLayerSelector : MonoBehaviour
         {
             Debug.LogError("Layer not found in Animator.");
             return;
+        }
+
+        for (int i = 0; i < animator.layerCount; i++)
+        {
+            if (i != layerIndex)
+            {
+                animator.SetLayerWeight(i, 0f);
+            }
         }
 
         animator.SetLayerWeight(layerIndex, 1f);
