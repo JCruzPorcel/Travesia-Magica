@@ -63,7 +63,7 @@ public class ItemBase : MonoBehaviour
 
         foreach (Collider2D player in hitPlayer)
         {
-            if (player.CompareTag("Player"))
+            if (player.CompareTag("Player") || player.CompareTag("Invulnerable"))
             {
                 ObjectAtribute();
                 this.gameObject.SetActive(false);

@@ -37,6 +37,11 @@ public class PlayerController : MonoBehaviour
         playerSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         particles = GetComponentInChildren<ParticleSystem>();
 
+        animator.speed = 1f;
+
+        if (particles != null)
+            particles.Play();
+
         // Calcula los límites de la cámara
         CameraBounds();       
     }

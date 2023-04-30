@@ -1,9 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpecialBullet : BaseBullet
 {
+    private void Awake()
+    {
+        shakeIntensity = 7f;
+        cameraShake = FindFirstObjectByType<CameraShake>();
+    }
+
     public override void Impact()
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
@@ -23,6 +27,7 @@ public class SpecialBullet : BaseBullet
             }
 
             enemyClass.TakenDamage(damage);
+            cameraShake.ShakeCameraWhenHit(shakeIntensity);
         }
     }
 }

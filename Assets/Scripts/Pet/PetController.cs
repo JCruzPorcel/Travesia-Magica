@@ -28,6 +28,11 @@ public class PetController : MonoBehaviour
         sr = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
         particles = GetComponentInChildren<ParticleSystem>();
+
+        anim.speed = 1;
+
+        if (particles != null)
+            particles.Play();
     }
 
     void FixedUpdate()

@@ -12,10 +12,13 @@ public class BaseBullet : MonoBehaviour
     public LayerMask enemyLayer;
     public float knockbackForce = 500f;
     public TrailRenderer trailRender;
+    public float shakeIntensity = 5f;
+    public CameraShake cameraShake;
 
-    private void Start()
+    private void Awake()
     {
         trailRender = GetComponentInChildren<TrailRenderer>();
+        cameraShake = FindFirstObjectByType<CameraShake>();
     }
 
     private void Update()
@@ -59,6 +62,7 @@ public class BaseBullet : MonoBehaviour
             }
 
             enemyClass.TakenDamage(damage);
+            cameraShake.ShakeCameraWhenHit(shakeIntensity);
 
             this.gameObject.SetActive(false);
         }

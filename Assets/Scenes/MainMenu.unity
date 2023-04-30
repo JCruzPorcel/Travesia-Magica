@@ -1951,7 +1951,7 @@ MonoBehaviour:
   gamepadDetectedText: Detectado
   gamepadReconnectedText: Reconectado
   gamepadAlertPrefab: {fileID: 1005840188546972261, guid: 4e53d4133b63e4940afbd5fefbb3f934, type: 3}
-  selectedButton: {fileID: 0}
+  selectedButton: {fileID: 122112894}
 --- !u!224 &1276721608 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4168062485811662687, guid: 25f5bb846c264f843b033fdc0bf28a3c, type: 3}

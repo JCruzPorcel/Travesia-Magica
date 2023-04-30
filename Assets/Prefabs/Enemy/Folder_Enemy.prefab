@@ -210,10 +210,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68b0c81079447d1458f7f667a7daebf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 12
+  speed: 30
   currentHp: 0
   maxHp: 25
-  damage: 12
+  damage: 22
   attackRange: 3.35
   attackPoint: {fileID: 5362388378908574293}
   playerLayer:
