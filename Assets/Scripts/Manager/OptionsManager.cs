@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using UnityEngine.Windows;
 
 public class OptionsManager : MonoBehaviour
 {
@@ -12,7 +11,7 @@ public class OptionsManager : MonoBehaviour
     [SerializeField] Button mainMenuButton;
     [SerializeField] Button exitButton;
 
-    public Button BackButton {get {return backButton; } }
+    public Button BackButton { get { return backButton; } }
 
     [Header("Menu Windows")]
     [SerializeField] GameObject optionMenu;
@@ -23,7 +22,7 @@ public class OptionsManager : MonoBehaviour
     const string mainMenuLevel = "MainMenu";
 
     bool inOptionMenu;
-    public bool InOptionMenu { get { return inOptionMenu;} set { inOptionMenu = value; } }
+    public bool InOptionMenu { get { return inOptionMenu; } set { inOptionMenu = value; } }
 
     FadeInOut fadeInOut;
     readonly float transitionTime = 1f;

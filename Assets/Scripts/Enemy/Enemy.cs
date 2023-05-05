@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     [Min(0f)] public int maxHp;
     [Range(0f, 25f)] public int damage;
 
+    public int scoreGiven;
     public float attackRange;
     public Transform attackPoint;
 
@@ -15,7 +16,7 @@ public class Enemy : MonoBehaviour
     public ParticleSystem particles;
 
     GameManager gameManager;
-    FloatingTextPool textPool;
+    FloatingTextPool damageTextPool;
 
     private void Start()
     {
@@ -26,7 +27,7 @@ public class Enemy : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
 
         particles = GetComponentInChildren<ParticleSystem>();
-        textPool = FindFirstObjectByType<FloatingTextPool>();
+        damageTextPool = FindFirstObjectByType<FloatingTextPool>();
     }
 
     private void Update()
@@ -60,7 +61,7 @@ public class Enemy : MonoBehaviour
 
     public void PopUpDamage(float damage)
     {
-        GameObject go = textPool.GetQueue();
+        GameObject go = damageTextPool.GetQueue();
 
         go.GetComponentInChildren<TextMesh>().text = damage.ToString();
 
@@ -85,6 +86,7 @@ public class Enemy : MonoBehaviour
 
         if (currentHp <= 0f)
         {
+            GiveScore();
             this.gameObject.SetActive(false);
         }
     }
@@ -97,6 +99,11 @@ public class Enemy : MonoBehaviour
     public virtual void ApplyKnockback(Vector2 direction, float force)
     {
         transform.Translate(direction.normalized * force * Time.deltaTime);
+    }
+
+    public virtual void GiveScore()
+    {
+        ScoreManager.Instance.GetEnemyScore(scoreGiven);
     }
 
     public virtual void Attack()

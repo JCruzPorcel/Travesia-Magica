@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "352878013067",
+    "firebase_url": "https://maglich-a19ad-default-rtdb.firebaseio.com",
+    "project_id": "maglich-a19ad",
+    "storage_bucket": "maglich-a19ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:352878013067:android:67be5dffbfd07ddde5828e",
+        "android_client_info": {
+          "package_name": "com.GAOVI.Maglich"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "352878013067-l19al13sv3mtp4jh5crrasjp94m688p3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBemrG_rEVWZTKEdquqADiKioCQw5Oy84w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "352878013067-l19al13sv3mtp4jh5crrasjp94m688p3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

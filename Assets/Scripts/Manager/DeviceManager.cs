@@ -40,7 +40,7 @@ public class DeviceManager : SingletonPersistent<DeviceManager>
     }
 
     public void CheckSelectedButtonIsNull()
-    {        
+    {
         if (selectedButton == null)
         {
             GameManager gameManger = GetComponent<GameManager>();
@@ -72,7 +72,7 @@ public class DeviceManager : SingletonPersistent<DeviceManager>
             case InputDeviceChange.Disconnected:
                 DeviceStatus($"Gamepad {gamepadDisconnectedText}");
 
-                if(GameManager.Instance.currentGameState == GameState.InGame)
+                if (GameManager.Instance.currentGameState == GameState.InGame)
                 {
                     GameManager.Instance.PauseGame();
                     OptionsManager optionsManager = FindFirstObjectByType<OptionsManager>();
@@ -88,6 +88,9 @@ public class DeviceManager : SingletonPersistent<DeviceManager>
 
     private void DeviceStatus(string alertMessage)
     {
+        if (!Application.isPlaying) // Si no está en modo de juego
+            return;
+
         if (gamepadAlertInstance == null)
         {
             // Obtener una referencia al Canvas que contiene el objeto
@@ -107,6 +110,7 @@ public class DeviceManager : SingletonPersistent<DeviceManager>
         gamepadAlertInstance.SetActive(true);
         gamepadAlertInstance.GetComponentInChildren<TMP_Text>().text = alertMessage;
     }
+
 
     private void SetDevice(DeviceType newDeviceType)
     {

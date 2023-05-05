@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static System.TimeZoneInfo;
 
 [Serializable]
 public enum GameState
@@ -9,9 +10,10 @@ public enum GameState
     MainMenu,
     InGame,
     OnPause,
+    GameOver
 }
 
-public class GameManager : SingletonPersistent<GameManager>
+public class GameManager : SingletonPersistent<GameManager> // Refactorizar, hacer solo la clase de C# y utilizar el static Event. 
 {
     public GameState currentGameState = GameState.MainMenu;
 
@@ -28,10 +30,12 @@ public class GameManager : SingletonPersistent<GameManager>
     public delegate void GameStateChangedHandler(GameState newGameState);
     public static event GameStateChangedHandler OnGameStateChanged;
 
-    private void Start()
+
+    private async void Start()
     {
         //currentGameState = GameState.MainMenu;
         Debug.Log($"Current Game State: {currentGameState}");
+        await FirebaseManager.SyncLocalScoresWithFirebase();
     }
 
     public void StartGame(float time)
@@ -54,6 +58,11 @@ public class GameManager : SingletonPersistent<GameManager>
         StartCoroutine(NewGameSate(GameState.MainMenu, time));
     }
 
+    public void GameOver()
+    {
+        SetGameState(GameState.GameOver);
+    }
+
     // Método para cambiar el estado del juego y notificar cambios
     private void SetGameState(GameState newGameState)
     {
@@ -66,7 +75,7 @@ public class GameManager : SingletonPersistent<GameManager>
         switch (newGameState)
         {
             case GameState.MainMenu:
-                // TODO: Implementar código para el estado MainMenu
+                // TODO: Implementar código para el estado MainMenu               
                 break;
 
             case GameState.InGame:
@@ -77,6 +86,11 @@ public class GameManager : SingletonPersistent<GameManager>
                 // TODO: Implementar código para el estado OnPause
                 OptionsManager optionsManager = FindFirstObjectByType<OptionsManager>();
                 optionsManager.OptionsMenu.SetActive(true);
+                break;
+            case GameState.GameOver:
+                //TODO: Game Over Leaderboard
+                LeaderboardManager leaderboardManager = FindFirstObjectByType<LeaderboardManager>();
+                leaderboardManager.GameOverGo.SetActive(true);
                 break;
         }
     }

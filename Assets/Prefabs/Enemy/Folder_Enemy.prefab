@@ -214,6 +214,7 @@ MonoBehaviour:
   currentHp: 0
   maxHp: 25
   damage: 22
+  scoreGiven: 15
   attackRange: 3.35
   attackPoint: {fileID: 5362388378908574293}
   playerLayer:

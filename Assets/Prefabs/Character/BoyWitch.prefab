@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3866756083728368269}
   - component: {fileID: 3866756083728368270}
   - component: {fileID: 3866756083728368271}
+  - component: {fileID: 5042923443133954563}
   m_Layer: 0
   m_Name: BoyWitch
   m_TagString: Untagged
@@ -107,6 +108,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5042923443133954563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3866756083728368268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56bce0525af3b744ab5f34fec65d92ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 3866756083728368271}
+  layerName: Boy
 --- !u!1 &8336127062852025032
 GameObject:
   m_ObjectHideFlags: 0

@@ -4881,6 +4881,7 @@ GameObject:
   - component: {fileID: 5310082547291668067}
   - component: {fileID: 4581273643699958423}
   - component: {fileID: 1261678118422885885}
+  - component: {fileID: 4332305893095951265}
   m_Layer: 0
   m_Name: GirlWitch
   m_TagString: Untagged
@@ -4977,3 +4978,17 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4332305893095951265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8764622229352772204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56bce0525af3b744ab5f34fec65d92ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1261678118422885885}
+  layerName: Girl

@@ -492,6 +492,10 @@ MonoBehaviour:
     m_GlyphIndex: 27
     m_Scale: 1
   - m_ElementType: 1
+    m_Unicode: 97
+    m_GlyphIndex: 6
+    m_Scale: 1
+  - m_ElementType: 1
     m_Unicode: 218
     m_GlyphIndex: 26
     m_Scale: 1

@@ -4,7 +4,6 @@ public class File_Enemy : Enemy
 {
     [SerializeField] float height = 2;
 
-
     public override void Attack()
     {
         Vector2 size = new Vector2(attackRange, attackRange * height);
