@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     private GameObject characterGo;
     Transform playerSpawnPoint;
 
-    private float xMin, xMax, yMin, yMax; // límites de la cámara
+    [SerializeField] private float xMin, xMax, yMin, yMax; // límites de la cámara
 
     private void Awake()
     {
@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
             particles.Play();
 
         // Calcula los límites de la cámara
-        CameraBounds();       
+        //CameraBounds();       
     }
 
 

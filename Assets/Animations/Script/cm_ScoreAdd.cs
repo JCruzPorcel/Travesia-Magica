@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 
@@ -29,18 +28,17 @@ public class cm_ScoreAdd : StateMachineBehaviour
         ScoreManager scoreManager = ScoreManager.Instance;
         TextMeshProUGUI scoreText = animator.GetComponent<TextMeshProUGUI>();
 
-        // Obtener el valor de texto del objeto TextMeshProUGUI
-        string textString = scoreText.text;
-
-        // Convertir el valor de texto a un entero
-        int score = int.Parse(textString);
-
-        // Agregar la puntuación al ScoreManager
-        scoreManager.AddScore(score);
-
-        // Borrar el valor de texto del objeto TextMeshProUGUI
-        scoreText.text = string.Empty;
+        if (long.TryParse(scoreText.text, out long score))
+        {
+            scoreManager.AddScore(score);
+            scoreText.text = string.Empty;
+        }
+        else
+        {
+            //Debug.LogError($"Unable to parse score: {scoreText.text}");
+        }
     }
+
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

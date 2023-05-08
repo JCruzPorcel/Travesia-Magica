@@ -5,8 +5,8 @@ public class HealthBar : MonoBehaviour
 {
     private const float DAMAGED_HEALTH_TIMER_MAX = 1f;
 
-    private Image barImage;
-    private Image damagedBarImage;
+    [SerializeField] Image barImage;
+    [SerializeField] Image damagedBarImage;
     private Color damagedColor;
     private float damagedHealthTimer;
 
@@ -17,8 +17,6 @@ public class HealthBar : MonoBehaviour
 
     private void Awake()
     {
-        barImage = GameObject.Find("Fill").GetComponent<Image>();
-        damagedBarImage = GameObject.Find("Fill Fade").GetComponent<Image>();
         healthSystem = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthSystem>();
 
         if (!healthShrinkBar)

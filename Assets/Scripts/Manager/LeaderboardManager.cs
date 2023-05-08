@@ -1,22 +1,24 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
-using static System.TimeZoneInfo;
 
 public class LeaderboardManager : MonoBehaviour
 {
-    [SerializeField] string playerName;
+    private const int MAX_TABLE_OF_PLAYERS = 8;
     const string mainMenuLevel = "MainMenu";
-    [SerializeField] int score;
 
-    [SerializeField] TextMeshProUGUI[] leaderboardTxt;
+    private string playerName;
+    private int score;
+
+    [SerializeField] TextMeshProUGUI[] leaderboardPlayerName_Text;
+    [SerializeField] TextMeshProUGUI[] leaderboardPlayerScore_Text;
     [SerializeField] TMP_InputField inputField;
 
     [SerializeField] Button localButton;
     [SerializeField] Button globalButton;
-    [SerializeField] Button mainMenu;
+    [SerializeField] Button backToMainMenuButton;
 
     [SerializeField] GameObject leaderboardGo;
     [SerializeField] GameObject gameOverGo;
@@ -36,7 +38,7 @@ public class LeaderboardManager : MonoBehaviour
 
         globalButton.onClick.AddListener(ShowGlobalLeaderboard);
         localButton.onClick.AddListener(ShowLocalLeaderboard);
-        mainMenu.onClick.AddListener(MainMenu);
+        backToMainMenuButton.onClick.AddListener(MainMenu);
     }
 
     private void MainMenu()
@@ -44,14 +46,15 @@ public class LeaderboardManager : MonoBehaviour
         fadeInOut.FadeIn();
         gameManager.LoadLevelAsync(1f, mainMenuLevel);
         gameManager.MainMenu(1f);
-        leaderboardGo.SetActive(false);
+        DisableButtonInteraction();
     }
 
     private async void SaveName(string text)
     {
         if (string.IsNullOrWhiteSpace(text)) return;
-        
+
         playerName = text;
+        score = (int)ScoreManager.Instance.PlayerScore;
 
         await FirebaseManager.SaveScore(playerName, score);
 
@@ -74,17 +77,26 @@ public class LeaderboardManager : MonoBehaviour
 
     private void PlayerList(List<PlayerScore> topScores)
     {
-        int count = 0;
+        if (topScores == null) return;
 
-        for (int i = 0; i < leaderboardTxt.Length; i++)
+        for (int i = 0; i < MAX_TABLE_OF_PLAYERS; i++)
         {
-            leaderboardTxt[i].text = "---";
+            leaderboardPlayerName_Text[i].text = "---";
+            leaderboardPlayerScore_Text[i].text = "---";
         }
 
-        foreach (var score in topScores)
+        for (int i = 0; i < topScores.Count; i++)
         {
-            leaderboardTxt[count].text = ($"{score.playerName}              {score.playerScore}");
-            count++;
+            leaderboardPlayerName_Text[i].text = topScores[i].playerName;
+            leaderboardPlayerScore_Text[i].text = topScores[i].playerScore.ToString();
         }
+
+    }
+
+    private void DisableButtonInteraction()
+    {
+        backToMainMenuButton.interactable = false;
+        localButton.interactable = false;
+        globalButton.interactable = false;
     }
 }

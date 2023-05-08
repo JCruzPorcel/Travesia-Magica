@@ -14,12 +14,12 @@ public class ScoreManager : Singleton<ScoreManager>
     public List<GameObject> scoreList = new();
     readonly Queue<GameObject> scoreQueue = new();
 
-    private int playerScore = 0; // puntuación actual del jugador
+    private long playerScore = 0; // puntuación actual del jugador
     private string ScoreFormat => playerScore.ToString().PadLeft(5, '0');
-    private int currentScore = 0;
+    private long currentScore = 0;
     [SerializeField] private int scorePerTime;
 
-    public int PlayerScore { get { return playerScore; } }
+    public long PlayerScore { get { return playerScore; } }
 
     private void Update()
     {
@@ -38,13 +38,13 @@ public class ScoreManager : Singleton<ScoreManager>
         }
     }
 
-    public void AddScore(int score)
+    public void AddScore(long score)
     {
         playerScore += score;
         scoreText.text = $"Score: {ScoreFormat}";
     }
 
-    public void GetEnemyScore(int score)
+    public void GetScoreFromAnotherObject(int score)
     {
         currentScore += score;
         timerText = timeLimit;
@@ -63,7 +63,11 @@ public class ScoreManager : Singleton<ScoreManager>
 
         while (timerText > 0f)
         {
-            text.text = $"+{currentScore}";
+            if (currentScore > 0)
+            {
+                text.text = $"+{currentScore}";
+            }
+
             timerText -= Time.deltaTime;
             yield return null;
         }

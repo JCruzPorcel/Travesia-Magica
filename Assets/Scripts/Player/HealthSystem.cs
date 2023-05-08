@@ -24,6 +24,8 @@ public class HealthSystem : MonoBehaviour
         healthAmount -= amount;
         anim.SetTrigger("Shake");
         cameraShake.ShakeCamera();
+       // TimerManager.Instance.
+
         if (healthAmount < 0)
         {
             healthAmount = 0;

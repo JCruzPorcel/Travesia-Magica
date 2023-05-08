@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [Range(0f, 50f)] public float speed = 10f;
+    [Range(0f, 100f)] public float speed = 10f;
     [HideInInspector] public float currentHp;
     [Min(0f)] public int maxHp;
     [Range(0f, 25f)] public int damage;
@@ -10,13 +10,16 @@ public class Enemy : MonoBehaviour
     public int scoreGiven;
     public float attackRange;
     public Transform attackPoint;
+    public float amountOfImpact = 3f;
 
     public LayerMask playerLayer;
     public Animator animator;
     public ParticleSystem particles;
 
     GameManager gameManager;
-    FloatingTextPool damageTextPool;
+    PopUpPooler damageTextPool;
+
+    public Vector2 size;
 
     private void Start()
     {
@@ -27,7 +30,7 @@ public class Enemy : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
 
         particles = GetComponentInChildren<ParticleSystem>();
-        damageTextPool = FindFirstObjectByType<FloatingTextPool>();
+        damageTextPool = FindFirstObjectByType<PopUpPooler>();
     }
 
     private void Update()
@@ -35,7 +38,7 @@ public class Enemy : MonoBehaviour
         if (gameManager.currentGameState == GameState.InGame)
         {
             DespawnDistance();
-            Attack();
+            Impact();
 
             animator.speed = 1f;
 
@@ -103,18 +106,19 @@ public class Enemy : MonoBehaviour
 
     public virtual void GiveScore()
     {
-        ScoreManager.Instance.GetEnemyScore(scoreGiven);
+        ScoreManager.Instance.GetScoreFromAnotherObject(scoreGiven);
     }
 
-    public virtual void Attack()
+    public virtual void Impact()
     {
-        Vector2 size = new Vector2(attackRange, attackRange);
+       // size = new Vector2(attackRange, attackRange);
 
         Collider2D[] hitPlayer = Physics2D.OverlapBoxAll(attackPoint.position, size, playerLayer);
 
         foreach (Collider2D player in hitPlayer)
         {
             player.GetComponent<HealthSystem>().Damage(damage);
+            TimerManager.Instance.PushPlayerBack(amountOfImpact);
             this.gameObject.SetActive(false);
         }
     }

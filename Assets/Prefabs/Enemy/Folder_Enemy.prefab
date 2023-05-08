@@ -23,13 +23,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1214884673927930407}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.45, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4811758766491757543}
-  m_RootOrder: 1
+  m_Father: {fileID: 7606129568175527623}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4600654167194251866
 GameObject:
@@ -61,7 +61,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5362388378908574293}
   m_Father: {fileID: 4811758766491757543}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -162,7 +163,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4, y: 3.4}
+  m_Size: {x: 4.24, y: 3.64}
   m_EdgeRadius: 0
 --- !u!1 &6387407681665228831
 GameObject:
@@ -194,7 +195,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7606129568175527623}
-  - {fileID: 5362388378908574293}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -214,12 +214,13 @@ MonoBehaviour:
   currentHp: 0
   maxHp: 25
   damage: 22
-  scoreGiven: 15
+  scoreGiven: 5
   attackRange: 3.35
   attackPoint: {fileID: 5362388378908574293}
+  amountOfImpact: 5
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
   animator: {fileID: 1246022881888047202}
   particles: {fileID: 0}
-  width: 1.21
+  size: {x: 4.31, y: 3.61}

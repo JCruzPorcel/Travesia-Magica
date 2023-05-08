@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class ItemBase : MonoBehaviour
+public class Item : MonoBehaviour
 {
-    [Range(0f, 50f)][SerializeField] protected float speed = 1f;
+    [Range(0f, 100f)]public float speed = 1f;
 
     public float attackRange;
     public Transform attackPoint;
@@ -10,6 +10,7 @@ public class ItemBase : MonoBehaviour
     public LayerMask playerLayer;
     GameManager gameManager;
     [HideInInspector] public Animator animator;
+    public Vector2 size;
 
     private void Start()
     {
@@ -57,7 +58,7 @@ public class ItemBase : MonoBehaviour
 
     public virtual void ItemPick()
     {
-        Vector2 size = new Vector2(attackRange, attackRange);
+        size = new Vector2(attackRange, attackRange);
 
         Collider2D[] hitPlayer = Physics2D.OverlapBoxAll(attackPoint.position, size, playerLayer);
 

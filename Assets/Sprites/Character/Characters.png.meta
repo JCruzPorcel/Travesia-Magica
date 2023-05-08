@@ -170,6 +170,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Girl_Head
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 572
+        width: 205
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e04d22a5ce70d964c891b7458570bddc
+      internalID: 1214075358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boy_Head
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 568
+        width: 221
+        height: 188
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6434402e09bf784781fcd02b32c1749
+      internalID: 1546863698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -182,7 +224,9 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Boy_Character: -1430293121
+      Boy_Head: 1546863698
       Girl_Character: -1195257174
+      Girl_Head: 1214075358
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

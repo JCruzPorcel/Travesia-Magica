@@ -151,11 +151,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d9c2dee953d2cb4891e8599fc86e0a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  attackRange: 4.5
+  speed: 35
+  attackRange: 2.18
   attackPoint: {fileID: 8083317532463590396}
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
   animator: {fileID: 0}
+  size: {x: 5, y: 7}
   healRecovery: 25

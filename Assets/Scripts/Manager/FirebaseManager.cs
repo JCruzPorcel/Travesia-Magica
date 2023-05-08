@@ -11,10 +11,9 @@ using UnityEngine;
 
 public static class FirebaseManager
 {
-    private const int MAX_TABLE_OF_PLAYERS = 10;
+    private const int MAX_TABLE_OF_PLAYERS = 8;
 
     private static DatabaseReference databaseRef = FirebaseDatabase.DefaultInstance.RootReference;
-
 
     public static async Task SaveScore(string playerName, int playerScore)
     {
@@ -55,6 +54,8 @@ public static class FirebaseManager
     }
     public static async Task<List<PlayerScore>> LoadGlobalScores()
     {
+        if (!IsConnectedToInternet()) return null;
+
         string path = "Leaderboard/Score";
         List<PlayerScore> playerScores = new List<PlayerScore>();
         await databaseRef.Child(path).OrderByValue().LimitToLast(10).GetValueAsync().ContinueWith(task =>

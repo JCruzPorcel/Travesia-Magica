@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Boy
   characterImage: {fileID: -1430293121, guid: 13a2767005966854f87e6b83e5b6beae, type: 3}
+  characterIcon: {fileID: 1546863698, guid: 13a2767005966854f87e6b83e5b6beae, type: 3}
   prefab: {fileID: 3866756083728368268, guid: ccf843b83866aca4594d9db9dc95671d, type: 3}

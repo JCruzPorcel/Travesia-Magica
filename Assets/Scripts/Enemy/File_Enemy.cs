@@ -2,12 +2,8 @@ using UnityEngine;
 
 public class File_Enemy : Enemy
 {
-    [SerializeField] float height = 2;
-
-    public override void Attack()
-    {
-        Vector2 size = new Vector2(attackRange, attackRange * height);
-
+    public override void Impact()
+    {       
         Collider2D[] hitPlayer = Physics2D.OverlapBoxAll(attackPoint.position, size, playerLayer);
 
         foreach (Collider2D player in hitPlayer)
@@ -15,6 +11,7 @@ public class File_Enemy : Enemy
             if (player.CompareTag("Player"))
             {
                 player.GetComponent<HealthSystem>().Damage(damage);
+                TimerManager.Instance.PushPlayerBack(amountOfImpact);
                 this.gameObject.SetActive(false);
             }
         }
@@ -23,8 +20,7 @@ public class File_Enemy : Enemy
     private void OnDrawGizmosSelected()
     {
         if (attackPoint == null) return;
-
-        Vector3 size = new Vector3(attackRange, attackRange * height, 0f);
+        
         Gizmos.DrawWireCube(attackPoint.position, size);
 
     }

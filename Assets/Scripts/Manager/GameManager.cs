@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static System.TimeZoneInfo;
 
 [Serializable]
 public enum GameState
@@ -13,9 +12,18 @@ public enum GameState
     GameOver
 }
 
+[SerializeField]
+public enum GameFlowState
+{
+    Waiting,
+    Normal,
+    Boss,
+}
+
 public class GameManager : SingletonPersistent<GameManager> // Refactorizar, hacer solo la clase de C# y utilizar el static Event. 
 {
     public GameState currentGameState = GameState.MainMenu;
+    public GameFlowState currentGameFlowState = GameFlowState.Normal;
 
     [SerializeField] private CharacterData characterSelected;
     public CharacterData CharacterSelected { get => characterSelected; set => characterSelected = value; }
@@ -41,6 +49,7 @@ public class GameManager : SingletonPersistent<GameManager> // Refactorizar, hac
     public void StartGame(float time)
     {
         StartCoroutine(NewGameSate(GameState.InGame, time));
+        currentGameFlowState = GameFlowState.Waiting;
     }
 
     public void PauseGame()
@@ -61,6 +70,23 @@ public class GameManager : SingletonPersistent<GameManager> // Refactorizar, hac
     public void GameOver()
     {
         SetGameState(GameState.GameOver);
+    }
+
+    // GameFlowState
+
+    public void NormalGame()
+    {
+        currentGameFlowState = GameFlowState.Normal;
+    }
+
+    public void BossBattle()
+    {
+        currentGameFlowState = GameFlowState.Boss;
+    }
+
+    public void Waiting()
+    {
+        currentGameFlowState = GameFlowState.Waiting;
     }
 
     // Método para cambiar el estado del juego y notificar cambios
@@ -90,7 +116,25 @@ public class GameManager : SingletonPersistent<GameManager> // Refactorizar, hac
             case GameState.GameOver:
                 //TODO: Game Over Leaderboard
                 LeaderboardManager leaderboardManager = FindFirstObjectByType<LeaderboardManager>();
-                leaderboardManager.GameOverGo.SetActive(true);
+
+                GameObject healthHUD = FindFirstObjectByType<HealthBar>().transform.GetChild(0).gameObject;
+                GameObject routeHUD = FindFirstObjectByType<HealthBar>().transform.GetChild(0).gameObject;
+
+
+                if (routeHUD != null)
+                {
+                    routeHUD.SetActive(false);
+                }
+
+                if (healthHUD != null)
+                {
+                    healthHUD.SetActive(false);
+                }
+
+                if (leaderboardManager != null)
+                {
+                    leaderboardManager.GameOverGo.SetActive(true);
+                }
                 break;
         }
     }

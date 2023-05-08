@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FloatingTextPool : MonoBehaviour
+public class PopUpPooler : MonoBehaviour
 {
     public List<GameObject> pool = new List<GameObject>();
     Queue<GameObject> queue = new Queue<GameObject>();
