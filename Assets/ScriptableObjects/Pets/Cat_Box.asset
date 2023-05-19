@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Cat_Box
   m_EditorClassIdentifier: 
   petName: Cat_Box
-  petImage: {fileID: 1791965415, guid: 63eb4e1e82ee8754fa7a32af2f5d16d2, type: 3}
+  petImage: {fileID: 300483661, guid: 4d2787d0070021649bc05f6ab99ecaa6, type: 3}
   prefab: {fileID: 4386468571873026990, guid: fcc11108032c89c4ab88d480f03aaa7a, type: 3}

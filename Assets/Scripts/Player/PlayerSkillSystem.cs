@@ -23,35 +23,41 @@ public class PlayerSkillSystem : MonoBehaviour
 
     private void Update()
     {
-        if (shieldEnabled)
+        if (GameManager.Instance.currentGameState == GameState.InGame)
         {
-            // Rotar el escudo en el eje Z
-            shieldPrefab.transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
-
-            if (shieldTimer > 0f)
+            if (shieldEnabled)
             {
-                shieldTimer -= Time.deltaTime;
+                // Rotar el escudo en el eje Z
+                shieldPrefab.transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
 
-                if (shieldTimer <= 0f)
+                if (shieldTimer > 0f)
                 {
-                    DisableShield();
+                    shieldTimer -= Time.deltaTime;
+
+                    if (shieldTimer <= 0f)
+                    {
+                        DisableShield();
+                    }
                 }
             }
-        }
-        else if (shieldTimer > 0f)
-        {
-            shieldTimer -= Time.deltaTime;
+            else if (shieldTimer > 0f)
+            {
+                shieldTimer -= Time.deltaTime;
+            }
         }
     }
 
     private void EnableShield(InputAction.CallbackContext context)
     {
-        if (!shieldEnabled && shieldTimer <= 0f)
+        if (GameManager.Instance.currentGameState == GameState.InGame)
         {
-            shieldEnabled = true;
-            shieldPrefab.SetActive(true);
-            shieldTimer = shieldDuration;
-            gameObject.tag = invulnerableTag;
+            if (!shieldEnabled && shieldTimer <= 0f)
+            {
+                shieldEnabled = true;
+                shieldPrefab.SetActive(true);
+                shieldTimer = shieldDuration;
+                gameObject.tag = invulnerableTag;
+            }
         }
     }
 

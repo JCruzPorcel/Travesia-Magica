@@ -306,6 +306,17 @@
                 {
                     "name": "",
                     "id": "872b8822-0772-4105-9119-33f3a1a5dbd8",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardAndMouse",
+                    "action": "Special Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bd14b1c1-ff65-47a4-80bc-26eee5f7fa56",
                     "path": "<Keyboard>/z",
                     "interactions": "",
                     "processors": "",
@@ -332,6 +343,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
+                    "action": "Shield",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d8422c9a-0ab6-4aa6-a058-824979a54fb6",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardAndMouse",
                     "action": "Shield",
                     "isComposite": false,
                     "isPartOfComposite": false

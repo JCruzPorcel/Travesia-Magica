@@ -35,9 +35,6 @@ public class TimerManager : Singleton<TimerManager>
         routeSlider.value = 0f;
 
         routeSlider.onValueChanged.AddListener(OnSliderValueChanged);
-
-        string path = Application.persistentDataPath + $"/LocalScore.dat";
-        Debug.Log(path);
     }
 
     private void Update()
@@ -107,7 +104,7 @@ public class TimerManager : Singleton<TimerManager>
         {
             if (progress >= 0.03f && progress <= .04f)
             {
-                Debug.Log("Aproximadamente 1/5 del camino recorrido");
+                //Debug.Log("Aproximadamente 1/5 del camino recorrido");
                 // TODO: Ejecutar la lógica correspondiente al primer umbral
 
                 GameManager.Instance.NormalGame();
@@ -121,12 +118,12 @@ public class TimerManager : Singleton<TimerManager>
             // Ejecutar la lógica correspondiente al umbral alcanzado
             if (lastThreshold >= 0.2f && lastThreshold < 0.4f)
             {
-                Debug.Log("Aproximadamente 2/5 del camino recorrido");
+                //Debug.Log("Aproximadamente 2/5 del camino recorrido");
                 // TODO: Ejecutar la lógica correspondiente al segundo umbral
             }
             else if (lastThreshold >= 0.4f && lastThreshold < 0.6f)
             {
-                Debug.Log("Aproximadamente 3/5 del camino recorrido");
+                //Debug.Log("Aproximadamente 3/5 del camino recorrido");
                 // TODO: Ejecutar la lógica correspondiente al tercer umbral
 
 
@@ -137,18 +134,18 @@ public class TimerManager : Singleton<TimerManager>
             }
             else if (lastThreshold >= 0.6f && lastThreshold < 0.9f)
             {
-                Debug.Log("Aproximadamente 4/5 del camino recorrido");
+                //Debug.Log("Aproximadamente 4/5 del camino recorrido");
 
                 // Calcular en qué parte del último cuarto se encuentra el usuario
                 if (progress >= 0.6f && progress < 0.7f)
                 {
-                    Debug.Log("Entre 60% y 70% del camino recorrido");
+                    //Debug.Log("Entre 60% y 70% del camino recorrido");
+                    UpdateObject(enemyPool, "Folder", 0f, 55f);
                     // TODO: Ejecutar la lógica correspondiente a la primera parte del último cuarto
-                    UpdateObject(enemyPool, "File", 0f, 55f);
                 }
                 else if (progress >= 0.8f && progress < 0.9f)
                 {
-                    Debug.Log("Entre 80% y 90% del camino recorrido");
+                    //Debug.Log("Entre 80% y 90% del camino recorrido");
                     // TODO: Ejecutar la lógica correspondiente a la tercera parte del último cuarto
 
                     UpdateObject(enemyPool, "File", 60f, 55f);
@@ -160,7 +157,7 @@ public class TimerManager : Singleton<TimerManager>
         }
         else if (progress >= 1f)
         {
-            Debug.Log("Se alcanzó el final del camino");
+            // Debug.Log("Se alcanzó el final del camino");
             // TODO: Ejecutar la lógica correspondiente al final del camino
             GameManager.Instance.BossBattle();
         }

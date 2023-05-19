@@ -38,6 +38,9 @@ public class GameManager : SingletonPersistent<GameManager> // Refactorizar, hac
     public delegate void GameStateChangedHandler(GameState newGameState);
     public static event GameStateChangedHandler OnGameStateChanged;
 
+    public delegate void GameFlowStateChangedHandler(GameFlowState newGameState);
+    public static event GameFlowStateChangedHandler OnGameFlowStateChanged;
+
 
     private async void Start()
     {
@@ -50,6 +53,7 @@ public class GameManager : SingletonPersistent<GameManager> // Refactorizar, hac
     {
         StartCoroutine(NewGameSate(GameState.InGame, time));
         currentGameFlowState = GameFlowState.Waiting;
+        OnGameFlowStateChanged?.Invoke(GameFlowState.Waiting);
     }
 
     public void PauseGame()
@@ -76,17 +80,20 @@ public class GameManager : SingletonPersistent<GameManager> // Refactorizar, hac
 
     public void NormalGame()
     {
-        currentGameFlowState = GameFlowState.Normal;
+        currentGameFlowState = GameFlowState.Normal; 
+        OnGameFlowStateChanged?.Invoke(GameFlowState.Normal);
     }
 
     public void BossBattle()
     {
         currentGameFlowState = GameFlowState.Boss;
+        OnGameFlowStateChanged?.Invoke(GameFlowState.Boss);
     }
 
     public void Waiting()
     {
         currentGameFlowState = GameFlowState.Waiting;
+        OnGameFlowStateChanged?.Invoke(GameFlowState.Waiting);
     }
 
     // Método para cambiar el estado del juego y notificar cambios
@@ -133,7 +140,7 @@ public class GameManager : SingletonPersistent<GameManager> // Refactorizar, hac
 
                 if (leaderboardManager != null)
                 {
-                    leaderboardManager.GameOverGo.SetActive(true);
+                    leaderboardManager.ShowLeaderboard();
                 }
                 break;
         }

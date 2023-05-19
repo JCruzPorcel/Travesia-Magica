@@ -1,0 +1,40 @@
+{
+  "dialogue": [
+    {
+      "character": "Environment",
+      "text": "*Sonido de 11101101001*"
+    },
+    {
+      "character": "Player",
+      "text": "Que fue eso?"
+    },
+    {
+      "character": "Boss",
+      "text": "Bienvenido, jugador."
+    },
+    {
+      "character": "Boss",
+      "text": "Veo que has logrado llegar hasta el final."
+    },
+    {
+      "character": "Player",
+      "text": "Si, fue bastante sensillo ha decir verdad."
+    },
+    {
+      "character": "Boss",
+      "text": "Hasta aqui has llegado, no puedo dejarte seguir."
+    },
+    {
+      "character": "Player",
+      "text": "Ya veremos..."
+    },
+    {
+      "character": "Environment",
+      "text": "*Sonido de 11101101001*"
+    },
+    {
+      "character": "Boss",
+      "text": "Perfecto. Vamos a empezar."
+    }
+  ]
+}

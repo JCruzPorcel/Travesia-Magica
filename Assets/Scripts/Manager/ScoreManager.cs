@@ -49,30 +49,48 @@ public class ScoreManager : Singleton<ScoreManager>
         currentScore += score;
         timerText = timeLimit;
 
-        StartCoroutine(UpdateScoreText());
+        try
+        {
+            StartCoroutine(UpdateScoreText());
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError("Se produjo un error al actualizar el texto del puntaje: " + ex.Message);
+        }
     }
 
     private IEnumerator UpdateScoreText()
     {
         GameObject go = SpawnText();
 
-        var text = go.GetComponent<TMPro.TextMeshProUGUI>();
-        var animator = go.GetComponent<Animator>();
-
-        text.text = string.Empty;
-
-        while (timerText > 0f)
+        if (go != null)
         {
-            if (currentScore > 0)
+            var text = go.GetComponent<TMPro.TextMeshProUGUI>();
+            var animator = go.GetComponent<Animator>();
+
+            if (text != null)
             {
-                text.text = $"+{currentScore}";
+                text.text = string.Empty;
             }
 
-            timerText -= Time.deltaTime;
-            yield return null;
+            while (timerText > 0f)
+            {
+                if (currentScore > 0 && text != null)
+                {
+                    text.text = $"+{currentScore}";
+                }
+
+                timerText -= Time.deltaTime;
+                yield return null;
+            }
+
+            currentScore = 0;
+
+            if (animator != null)
+            {
+                animator.SetTrigger("HideAddScore");
+            }
         }
-        currentScore = 0;
-        animator.SetTrigger("HideAddScore");
     }
 
 
@@ -99,9 +117,18 @@ public class ScoreManager : Singleton<ScoreManager>
         }
         else
         {
-            Debug.Log("No more score text objects in queue.");
-        }
-        return null;
-    }
+            GameObject poolParent = GameObject.Find($"Environment Floating Text Pool");
 
+            if (poolParent == null)
+            {
+                poolParent = new GameObject($"Environment Floating Text Pool");
+            }
+
+            GameObject prefab = ObjectPooler.Instance.GetPrefab(ObjectType.Environment, "Floating Text");
+            GameObject go = Instantiate(prefab, poolParent.transform);
+            go.name = "Floating Text";
+            scoreList.Add(go);
+            return go;
+        }
+    }
 }

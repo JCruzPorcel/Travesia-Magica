@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Cat_Heart
   m_EditorClassIdentifier: 
   petName: Cat_Heart
-  petImage: {fileID: 819905891, guid: 63eb4e1e82ee8754fa7a32af2f5d16d2, type: 3}
+  petImage: {fileID: -542552281, guid: 4d2787d0070021649bc05f6ab99ecaa6, type: 3}
   prefab: {fileID: 2986474441890030439, guid: ec8a9b6bd816407498d23b88f006fa18, type: 3}

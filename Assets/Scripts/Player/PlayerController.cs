@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
 
         playerInputs.Player.Movement.performed += OnMove;
         playerInputs.Player.Movement.canceled += OnMove;
+        particles = GetComponentInChildren<ParticleSystem>();
     }
 
     private void Start()
@@ -35,7 +36,6 @@ public class PlayerController : MonoBehaviour
 
         animator = GetComponentInChildren<Animator>();
         playerSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        particles = GetComponentInChildren<ParticleSystem>();
 
         animator.speed = 1f;
 

@@ -1,34 +1,35 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCombat : MonoBehaviour
 {
     private PlayerControls playerInput;
 
     private bool isBasicShootButtonPressed;
-    private bool isSecondaryShootButtonPressed;
+    //private bool isSecondaryShootButtonPressed;
     private bool isSpecialShootButtonPressed;
 
     private Queue<GameObject> basicBulletQueue = new Queue<GameObject>();
-    private Queue<GameObject> secondaryBulletQueue = new Queue<GameObject>();
+    //private Queue<GameObject> secondaryBulletQueue = new Queue<GameObject>();
     private Queue<GameObject> specialBulletQueue = new Queue<GameObject>();
 
     private List<GameObject> basicBulletPool;
-    private List<GameObject> secondaryBulletPool;
+    //private List<GameObject> secondaryBulletPool;
     private List<GameObject> specialBulletPool;
 
     private float timeSinceLastBasicShot;
-    private float timeSinceLastSecondaryShot;
+    //private float timeSinceLastSecondaryShot;
     private float timeSinceLastSpecialShot;
 
     [SerializeField] private float basicShot_FireRate = 0.1f;
-    [SerializeField] private float secondaryShot_FireRate = 0.2f;
+   // [SerializeField] private float secondaryShot_FireRate = 0.2f;
     [SerializeField] private float specialShot_FireRate = 0.5f;
 
     [SerializeField] private Transform shotPoint;
 
     private const string basicBulletTag = "Basic Bullet";
-    private const string secondaryBulletTag = "Secondary Bullet";
+  //  private const string secondaryBulletTag = "Secondary Bullet";
     private const string specialBulletTag = "Special Bullet";
 
     private void Awake()
@@ -39,8 +40,8 @@ public class PlayerCombat : MonoBehaviour
         playerInput.Player.BasicShoot.started += context => isBasicShootButtonPressed = true;
         playerInput.Player.BasicShoot.canceled += context => isBasicShootButtonPressed = false;
 
-        playerInput.Player.SecondaryShoot.started += context => isSecondaryShootButtonPressed = true;
-        playerInput.Player.SecondaryShoot.canceled += context => isSecondaryShootButtonPressed = false;
+       // playerInput.Player.SecondaryShoot.started += context => isSecondaryShootButtonPressed = true;
+       // playerInput.Player.SecondaryShoot.canceled += context => isSecondaryShootButtonPressed = false;
 
         playerInput.Player.SpecialShoot.started += context => isSpecialShootButtonPressed = true;
         playerInput.Player.SpecialShoot.canceled += context => isSpecialShootButtonPressed = false;
@@ -49,27 +50,31 @@ public class PlayerCombat : MonoBehaviour
     private void Start()
     {
         basicBulletPool = ObjectPooler.Instance.GetPool(ObjectType.Player, basicBulletTag);
-        secondaryBulletPool = ObjectPooler.Instance.GetPool(ObjectType.Player, secondaryBulletTag);
+      //  secondaryBulletPool = ObjectPooler.Instance.GetPool(ObjectType.Player, secondaryBulletTag);
         specialBulletPool = ObjectPooler.Instance.GetPool(ObjectType.Player, specialBulletTag);
     }
 
     private void Update()
     {
-        AddObjectsToQueue(basicBulletPool, basicBulletQueue);
-        AddObjectsToQueue(secondaryBulletPool, secondaryBulletQueue);
-        AddObjectsToQueue(specialBulletPool, specialBulletQueue);
+        if (GameManager.Instance.currentGameState == GameState.InGame)
+        {
+            AddObjectsToQueue(basicBulletPool, basicBulletQueue);
+            //AddObjectsToQueue(secondaryBulletPool, secondaryBulletQueue);
+            AddObjectsToQueue(specialBulletPool, specialBulletQueue);
 
-        if (isBasicShootButtonPressed)
-        {
-            ShootRepeatedly(basicBulletQueue, basicBulletPool, ref timeSinceLastBasicShot, basicShot_FireRate, basicBulletTag);
-        }
-        else if (isSecondaryShootButtonPressed)
-        {
-            ShootRepeatedly(secondaryBulletQueue, secondaryBulletPool, ref timeSinceLastSecondaryShot, secondaryShot_FireRate, secondaryBulletTag);
-        }
-        else if (isSpecialShootButtonPressed)
-        {
-            ShootRepeatedly(specialBulletQueue, specialBulletPool, ref timeSinceLastSpecialShot, specialShot_FireRate, specialBulletTag);
+            if (isBasicShootButtonPressed)
+            {
+                ShootRepeatedly(basicBulletQueue, basicBulletPool, ref timeSinceLastBasicShot, basicShot_FireRate, basicBulletTag);
+            }
+           /* else if (isSecondaryShootButtonPressed)
+            {
+                ShootRepeatedly(secondaryBulletQueue, secondaryBulletPool, ref timeSinceLastSecondaryShot, secondaryShot_FireRate, secondaryBulletTag);
+            }*/
+            else if (isSpecialShootButtonPressed)
+            {
+                ShootRepeatedly(specialBulletQueue, specialBulletPool, ref timeSinceLastSpecialShot, specialShot_FireRate, specialBulletTag);
+            }
+
         }
     }
 

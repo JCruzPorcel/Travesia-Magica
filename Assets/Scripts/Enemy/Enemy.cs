@@ -40,14 +40,16 @@ public class Enemy : MonoBehaviour
             DespawnDistance();
             Impact();
 
-            animator.speed = 1f;
+            if (animator != null)
+                animator.speed = 1f;
 
             if (particles != null)
                 particles.Play();
         }
         else
         {
-            animator.speed = 0f;
+            if (animator != null)
+                animator.speed = 0f;
 
             if (particles != null)
                 particles.Pause();
@@ -73,7 +75,7 @@ public class Enemy : MonoBehaviour
         go.SetActive(true);
     }
 
-    private void DespawnDistance()
+    public virtual void DespawnDistance()
     {
         if (transform.position.x <= -50f)
         {
@@ -111,7 +113,7 @@ public class Enemy : MonoBehaviour
 
     public virtual void Impact()
     {
-       // size = new Vector2(attackRange, attackRange);
+        // size = new Vector2(attackRange, attackRange);
 
         Collider2D[] hitPlayer = Physics2D.OverlapBoxAll(attackPoint.position, size, playerLayer);
 

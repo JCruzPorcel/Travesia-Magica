@@ -8,7 +8,7 @@ public class Parallax : MonoBehaviour
 
     const string cloudTag = "Cloud";
     const float minSpawnDistance = 5.0f;
-    const float minX = 50.0f;
+    const float minX = 60.0f;
     const float maxX = 70.0f;
     const float minY = -22.0f;
     const float maxY = 22.0f;

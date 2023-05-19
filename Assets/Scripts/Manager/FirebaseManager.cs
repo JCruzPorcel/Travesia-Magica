@@ -58,7 +58,7 @@ public static class FirebaseManager
 
         string path = "Leaderboard/Score";
         List<PlayerScore> playerScores = new List<PlayerScore>();
-        await databaseRef.Child(path).OrderByValue().LimitToLast(10).GetValueAsync().ContinueWith(task =>
+        await databaseRef.Child(path).OrderByValue().GetValueAsync().ContinueWith(task =>
         {
             if (task.IsFaulted)
             {
@@ -86,7 +86,7 @@ public static class FirebaseManager
                 playerScores.Reverse();
             }
         });
-        return playerScores.Take(MAX_TABLE_OF_PLAYERS).ToList();
+        return playerScores;
     }
     #endregion
 
@@ -177,7 +177,7 @@ public static class FirebaseManager
         scores.Sort();
         scores.Reverse();
 
-        return scores.Take(MAX_TABLE_OF_PLAYERS).ToList();
+        return scores;
     }
     #endregion
 

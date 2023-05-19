@@ -74,8 +74,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -900
-  m_Sprite: {fileID: 21300000, guid: 1113c36b8e3bc88469826c98a8edc002, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5882353}
+  m_Sprite: {fileID: 21300000, guid: 16dcbc85281675a408659c566f311ec5, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -97,4 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d64d2b18ccee1b4b82fa79535bf48dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clouds:
+  - {fileID: 21300000, guid: 16dcbc85281675a408659c566f311ec5, type: 3}
+  - {fileID: 21300000, guid: d6cd0812eade3a34e89d52f82211f4cd, type: 3}
   speed: 0

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GrilWitch
   m_EditorClassIdentifier: 
   characterName: Girl
-  characterImage: {fileID: -1195257174, guid: 13a2767005966854f87e6b83e5b6beae, type: 3}
-  characterIcon: {fileID: 1214075358, guid: 13a2767005966854f87e6b83e5b6beae, type: 3}
+  characterImage: {fileID: 1457774824, guid: 791123bf142d97548bfd4767742adca2, type: 3}
+  characterIcon: {fileID: -469034764, guid: 791123bf142d97548bfd4767742adca2, type: 3}
   prefab: {fileID: 8764622229352772204, guid: 70f564dbca1c7f64ca871a31bba4939f, type: 3}
