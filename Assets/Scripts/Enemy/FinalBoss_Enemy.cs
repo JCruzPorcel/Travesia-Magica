@@ -2,6 +2,17 @@
 
 public class FinalBoss_Enemy : Enemy
 {
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private float attackInterval = 2f; // Intervalo de tiempo entre ataques
+
+    private float timeSinceLastAttack = 0f;
+
+    public override void Update()
+    {
+        base.Update();
+        AttackCooldown();
+    }
+
     public override void ApplyKnockback(Vector2 direction, float force)
     {
 
@@ -36,5 +47,31 @@ public class FinalBoss_Enemy : Enemy
     public override void DespawnDistance()
     {
 
+    }
+
+    private void AttackCooldown()
+    {
+        // Actualiza el tiempo transcurrido desde el último ataque
+        timeSinceLastAttack += Time.deltaTime;
+
+        // Verifica si es hora de atacar nuevamente
+        if (timeSinceLastAttack >= attackInterval)
+        {
+            Attack();
+            timeSinceLastAttack = 0f; // Reinicia el tiempo desde el último ataque
+        }
+    }
+
+    private void Attack()
+    {
+        // Crea un proyectil si el proyectilPrefab está asignado
+        if (projectilePrefab != null)
+        {
+            // Aquí puedes instanciar un proyectil en la posición del enemigo
+            // Puedes ajustar la lógica para determinar la posición y dirección del proyectil
+            GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+
+            // Agrega lógica adicional para configurar el movimiento y comportamiento del proyectil
+        }
     }
 }

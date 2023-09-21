@@ -9,14 +9,14 @@ public class FinalBattleController : MonoBehaviour
 
     private void Start()
     {
-        GameManager.OnGameStateChanged += HandleGameStateChanged;
+        //GameManager.OnGameStateChanged += HandleGameStateChanged;
         GameManager.OnGameFlowStateChanged += HandleGameFlowChanged;
     }
 
-    private void HandleGameStateChanged(GameState newGameState)
+    /*private void HandleGameStateChanged(GameState newGameState)
     {
 
-    }
+    }*/
 
 
 

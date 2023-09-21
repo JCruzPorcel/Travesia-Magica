@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
         damageTextPool = FindFirstObjectByType<PopUpPooler>();
     }
 
-    private void Update()
+    public virtual void Update()
     {
         if (gameManager.currentGameState == GameState.InGame)
         {

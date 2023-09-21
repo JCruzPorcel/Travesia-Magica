@@ -32,6 +32,9 @@ public class DialogueSystem : MonoBehaviour
         playerImg.sprite = GameManager.Instance.CharacterSelected.CharacterImage;
     }
 
+    private float autoAdvanceTimer = 0f;
+    [SerializeField] float autoAdvanceDelay = 5f; // Adjust this value to set the delay before auto-advancing.
+
     private void Update()
     {
         if (GameManager.Instance.currentGameFlowState == GameFlowState.Boss)
@@ -48,6 +51,7 @@ public class DialogueSystem : MonoBehaviour
                     }
 
                     StartCoroutine(TypeDialogue(dialogueList[currentDialogueIndex]));
+                    ResetAutoAdvanceTimer(); // Reset the timer when the user clicks.
                 }
                 else if (isTyping)
                 {
@@ -56,7 +60,31 @@ public class DialogueSystem : MonoBehaviour
                     isTyping = false;
                 }
             }
+            else
+            {
+                // If the user hasn't clicked, start counting down the auto-advance timer.
+                autoAdvanceTimer -= Time.deltaTime;
+                if (autoAdvanceTimer <= 0f)
+                {
+                    // Auto-advance to the next text when the timer expires.
+                    currentDialogueIndex++;
+                    if (currentDialogueIndex >= dialogueList.Count)
+                    {
+                        finalBattleController.StartBossBattle();
+                        return;
+                    }
+
+                    StartCoroutine(TypeDialogue(dialogueList[currentDialogueIndex]));
+                    ResetAutoAdvanceTimer();
+                }
+            }
         }
+    }
+
+    // Call this method to reset the auto-advance timer.
+    private void ResetAutoAdvanceTimer()
+    {
+        autoAdvanceTimer = autoAdvanceDelay;
     }
 
     private void LoadDialogue()

@@ -274,6 +274,7 @@ MonoBehaviour:
   director: {fileID: 32545077}
   finalBattleController: {fileID: 633036183}
   typingSpeed: 0.05
+  autoAdvanceDelay: 3
 --- !u!4 &32545076
 Transform:
   m_ObjectHideFlags: 0
@@ -6186,7 +6187,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1035816664
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7423,6 +7424,10 @@ PrefabInstance:
       propertyPath: scoreGiven
       value: 5000
       objectReference: {fileID: 0}
+    - target: {fileID: 60117805709985939, guid: 5d23a53a144cd9247aa6a738861c808c, type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 7954092258343527681, guid: 996db2770ad3af24a928c3dfab310dc4, type: 3}
     - target: {fileID: 1892953352181108222, guid: 5d23a53a144cd9247aa6a738861c808c, type: 3}
       propertyPath: m_Name
       value: Boss

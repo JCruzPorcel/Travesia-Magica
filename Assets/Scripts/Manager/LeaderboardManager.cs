@@ -92,15 +92,13 @@ public class LeaderboardManager : MonoBehaviour
                 playerScore_Text[i].text = topScores[i].playerScore.ToString("D5");
                 playerNumberPositio_Text[i].text = $"{i + 1}.";
 
+                playerScore_Text[i].color = normalColor;
+                playerName_Text[i].color = normalColor;
+
                 if (playerName == topScores[i].playerName && playerScore == topScores[i].playerScore)
                 {
                     playerScore_Text[i].color = highlightColor;
                     playerName_Text[i].color = highlightColor;
-                }
-                else
-                {
-                    playerScore_Text[i].color = normalColor;
-                    playerName_Text[i].color = normalColor;
                 }
                 divisorGo.SetActive(false);
             }

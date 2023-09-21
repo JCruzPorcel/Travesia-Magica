@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8821363907163876217}
   - component: {fileID: 8154873369203915958}
+  - component: {fileID: 5152404549061797256}
+  - component: {fileID: 4153149836777428089}
   m_Layer: 0
   m_Name: Boss Bullet
   m_TagString: Untagged
@@ -84,3 +86,44 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5152404549061797256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7954092258343527681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 665461da8c2f6b347be09aa5e7de7ba2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDamage: 0
+  multiplierCritical: 2
+  chanceCritical: 0.1
+  speed: 0
+  attackRange: 0
+  attackPoint: {fileID: 8821363907163876217}
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  knockbackForce: 500
+  trailRender: {fileID: 0}
+  shakeIntensity: 5
+  cameraShake: {fileID: 0}
+--- !u!58 &4153149836777428089
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7954092258343527681}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.3780563
